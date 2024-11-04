@@ -65,7 +65,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jPasswordField1);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("jButton1");
+        jButton1.setText("Entrar");
         jPanel1.add(jButton1);
 
         getContentPane().add(jPanel1);
