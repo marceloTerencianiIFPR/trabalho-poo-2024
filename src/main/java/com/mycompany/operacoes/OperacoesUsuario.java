@@ -7,6 +7,7 @@ package com.mycompany.operacoes;
 import com.mycompany.conexao.Conexao;
 import com.mycompany.modelo.Usuario;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -25,5 +26,27 @@ public class OperacoesUsuario {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static Usuario buscarPorEmail(String email) {
+        String sql = "SELECT * FROM tb_usuario WHERE email = ?";
+        Usuario usuario = null;
+        try {
+            PreparedStatement sqlPreparada = Conexao.getConexao().prepareStatement(sql);
+            sqlPreparada.setString(1, email);
+            ResultSet resultado = sqlPreparada.executeQuery();
+
+            while (resultado.next()) {
+                usuario = new Usuario();
+                usuario.setId(resultado.getInt("id_usuario"));
+                usuario.setNome(resultado.getString("nome"));
+                usuario.setEmail(resultado.getString("email"));
+                usuario.setSenha(resultado.getString("senha"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return usuario;
     }
 }
